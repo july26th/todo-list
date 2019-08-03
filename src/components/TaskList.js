@@ -8,10 +8,14 @@ class TaskList extends Component{
   
   
   render(){
+    var { tasks } = this.props;
+    var elmTasks = tasks.map((item, index) => {
+      return <TaskItem key={index} id={index} task={item} />
+    }); 
     return(
         <div className="row">
               <div className="col-md-12">
-               <table class="table table-borderd table-hover">
+               <table className="table table-borderd table-hover">
               <thead>
                 <tr>
                   <th>STT</th>
@@ -24,7 +28,7 @@ class TaskList extends Component{
                 <tr>
                   <td></td>
                   <td>
-                    <input type="text" classNama="form-control" name="filterName"
+                    <input type="text" className="form-control" name="filterName"
                     />
                   </td>
                   <td>
@@ -36,20 +40,8 @@ class TaskList extends Component{
                   </td>
                   <td></td>
                 </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Học angular</td>
-                  <td>
-                    <span className="badge badge-danger">Kích hoạt</span>
-                  </td>
-                  <td>
-                    <button className="btn btn-warning" type="submit">Sửa</button>
-                    <button className="btn btn-danger" type="submit">Xóa</button>
-                  </td>
-                </tr>
-                <TaskItem />
-                <TaskItem />
-                <TaskItem />
+                
+                {elmTasks}
               </tbody>
             </table>
                 </div>

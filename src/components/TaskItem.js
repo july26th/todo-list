@@ -1,4 +1,5 @@
 import React, { Component} from "react";
+import classNames from 'classnames';
 class TaskItem extends Component{
   constructor() {
     super();
@@ -7,12 +8,15 @@ class TaskItem extends Component{
   
   
   render(){
+      var {task, id} = this.props;
     return(
         <tr>
-            <td>1</td>
-            <td>Học angular</td>
+            <td>{id}</td>
+            <td>{task.name}</td>
             <td>
-            <span className="badge badge-danger">Kích hoạt</span>
+            <span className ={classNames('btn', {'btn-outline-success': task.status}, 
+            {'btn-outline-dark': !task.status})}>
+            {task.status === true ? 'Kích hoạt' : 'Ẩn'}</span>
             </td>
             <td>
             <button className="btn btn-warning" type="submit">Sửa</button>

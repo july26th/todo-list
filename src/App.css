@@ -1,0 +1,18 @@
+.header-taskform {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  background-color: #007bff;
+  padding: 10px 14px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.header-taskform .close {
+  padding-top: 12px;
+  font-size: 36px;
+  color: #fff;
+}
+.modal-content {
+  border: 1px solid #eaeaea;
+  border-radius: 20px;
+}
