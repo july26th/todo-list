@@ -9,7 +9,11 @@ class App extends Component{
     this.state = {
       tasks: [],
       isEditing: null,
-      isDisplay: false
+      isDisplay: false,
+      filter: {
+        name: '',
+        status: -1
+      }
     }
   }
   
@@ -133,14 +137,36 @@ class App extends Component{
       isEditing: null
     })
   }
+  onFilter = (filterName, filterStatus) =>{
+    filterStatus = parseInt(filterStatus)
+    this.setState({
+      filter: {
+        name: filterName.toLowerCase(),
+        status: filterStatus
+      }
+    });
+    console.log(filterName, filterStatus);
+  }
   render(){
-    var { tasks, isEditing, isDisplay } = this.state;
+    var { tasks, isEditing, isDisplay, filter } = this.state;
     const $ = window.$;
     if(isDisplay) {
       $("#myModal").modal('show');
     }
     else {
       $("#myModal").modal('hide');
+    }
+    if(filter) {
+      if(filter.name)
+      {
+        tasks = tasks.filter((key) => {
+          return key.taskName.toLowerCase().indexOf(filter.name) !== -1;
+        });
+      }
+      tasks = tasks.filter((key) =>{
+        if(filter.status === -1) return key;
+        else  return key.status === (filter.status === 0 ? false : true);
+      });
     }
     return(
       <div className="App">
@@ -161,7 +187,7 @@ class App extends Component{
           </div>
           </div>
             <Control />
-            <TaskList tasks = {tasks} onDelete={this.onDelete}
+            <TaskList onFilter={this.onFilter} tasks = {tasks} onDelete={this.onDelete}
              onUpdateStatus={this.onUpdateStatus} onEdit={this.onEdit}/>
         </div>
       </div>

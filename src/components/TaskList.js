@@ -3,14 +3,33 @@ import TaskItem from "./TaskItem";
 class TaskList extends Component{
   constructor() {
     super();
-
+    this.state = {
+      filterName: '',
+      filterStatus: -1
+    };
+  }
+  onChange = (event) => {
+    var name = event.target.name;
+    var value = event.target.value;
+    // if(name === 'filterName') var valueName = value;
+    // else var valueStatus = value;
+    
+    this.setState({
+      [name] : value
+    });
+    // this.props.onFilter(
+    //   this.state.filterName,
+    //   this.state.filterStatus);
+    this.props.onFilter(name ==='filterName' ? value : this.state.filterName,
+      name ==='filterStatus' ? value : this.state.filterStatus)
   }
   render(){
-    var { tasks } = this.props;
+    const { tasks } = this.props;
+    const {filterName, filterStatus} = this.state;
     var elmTasks = tasks.map((item, index) => {
       return <TaskItem key={index} id={index} task={item} onEdit={this.props.onEdit}
       onDelete={this.props.onDelete} onUpdateStatus = {this.props.onUpdateStatus} />
-    }); 
+    });  
     return(
         <div className="row">
               <div className="col-md-12">
@@ -28,13 +47,15 @@ class TaskList extends Component{
                   <td></td>
                   <td>
                     <input type="text" className="form-control" name="filterName"
+                    value={filterName} onChange={this.onChange}
                     />
                   </td>
                   <td>
-                    <select className="form-control" name="filterstatus">
-                      <option value={0}>Tất cả</option>
-                      <option value={1}>Ẩn</option>
-                      <option value={2}>Kích hoạt</option>
+                    <select className="form-control" name="filterStatus"
+                    value={filterStatus} onChange={this.onChange} >
+                      <option value={-1}>Tất cả</option>
+                      <option value={0}>Ẩn</option>
+                      <option value={1}>Kích hoạt</option>
                     </select>
                   </td>
                   <td></td>
