@@ -1,12 +1,10 @@
 import React, { Component} from "react";
 
 class Sort extends Component{
-  constructor() {
-    super();
 
-  }
-  
-  
+  onClick= (sortBy, sortValue) => {
+    this.props.onSort(sortBy, sortValue);
+  };
   render(){
     return(
             <div className="col-md-6">
@@ -15,10 +13,18 @@ class Sort extends Component{
                 Sắp xếp
               </button>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a className="dropdown-item" href="#">Tên A->Z</a>
-                <a className="dropdown-item" href="#">Tên Z->A</a>
-                <a className="dropdown-item" href="#">Trạng thái Kích hoạt</a>
-                <a className="dropdown-item" href="#">Trạng thái Ẩn</a>
+                <a className="dropdown-item" href="#" onClick={ () => this.onClick('name', 1)}>
+                  Tên A->Z
+                  </a>
+                <a className="dropdown-item" href="#" onClick={ () => this.onClick('name', -1)}>
+                  Tên Z->A
+                  </a>
+                <a className="dropdown-item" href="#" onClick={ () => this.onClick('status', 1)}>
+                  Trạng thái Kích hoạt
+                  </a>
+                <a className="dropdown-item" href="#" onClick={ () => this.onClick('status', -1)}>
+                  Trạng thái Ẩn
+                  </a>
               </div>
             </div>
             </div>

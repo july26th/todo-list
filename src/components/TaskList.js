@@ -11,15 +11,9 @@ class TaskList extends Component{
   onChange = (event) => {
     var name = event.target.name;
     var value = event.target.value;
-    // if(name === 'filterName') var valueName = value;
-    // else var valueStatus = value;
-    
     this.setState({
       [name] : value
     });
-    // this.props.onFilter(
-    //   this.state.filterName,
-    //   this.state.filterStatus);
     this.props.onFilter(name ==='filterName' ? value : this.state.filterName,
       name ==='filterStatus' ? value : this.state.filterStatus)
   }

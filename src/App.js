@@ -13,7 +13,10 @@ class App extends Component{
       filter: {
         name: '',
         status: -1
-      }
+      },
+      keyword: '',
+      sortBy: 'name',
+      sortValue: 1
     }
   }
   
@@ -130,13 +133,13 @@ class App extends Component{
     this.setState({
       isDisplay: false
     })
-  }
+  };
   deleteEdit = (value) => {
     if(value) 
     this.setState({
       isEditing: null
     })
-  }
+  };
   onFilter = (filterName, filterStatus) =>{
     filterStatus = parseInt(filterStatus)
     this.setState({
@@ -145,16 +148,48 @@ class App extends Component{
         status: filterStatus
       }
     });
-    console.log(filterName, filterStatus);
+  };
+  onSearch = (value) => {
+    this.setState({
+      keyword: value
+    });
+  };
+  onSort = (sortBy, sortValue) => {
+    this.setState({
+      sortBy: sortBy,
+      sortValue: sortValue
+    }
+    // ,() => console.log(this.state)
+    );
+    
   }
   render(){
-    var { tasks, isEditing, isDisplay, filter } = this.state;
+    var { tasks, isEditing, isDisplay, filter, keyword, sortBy, sortValue } = this.state;
     const $ = window.$;
+    if(sortBy === 'name')
+    {
+      tasks.sort((a, b) => {
+        if(a.taskName > b.taskName) return sortValue;
+        else if(a.taskName < b.taskName) return -sortValue;
+        else return 0;
+      });
+    } else {
+      tasks.sort((a, b) => {
+        if(a.status > b.status) return -sortValue;
+        else if(a.status < b.status) return sortValue;
+        else return 0;
+      });
+    }
     if(isDisplay) {
       $("#myModal").modal('show');
     }
     else {
       $("#myModal").modal('hide');
+    }
+    if(keyword) {
+      tasks = tasks.filter((key) => {
+        return key.taskName.toLowerCase().indexOf(keyword) !== -1;
+      });
     }
     if(filter) {
       if(filter.name)
@@ -186,7 +221,7 @@ class App extends Component{
             }
           </div>
           </div>
-            <Control />
+            <Control onSearch={this.onSearch} onSort={this.onSort}/>
             <TaskList onFilter={this.onFilter} tasks = {tasks} onDelete={this.onDelete}
              onUpdateStatus={this.onUpdateStatus} onEdit={this.onEdit}/>
         </div>
