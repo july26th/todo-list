@@ -6,21 +6,29 @@ class TaskItem extends Component{
 
   }
   
-  
+  onUpdateStatus = () => {
+    return this.props.onUpdateStatus(this.props.id);
+  }
+  onDelete = () => {
+    return this.props.onDelete(this.props.id);
+  }
+  onEdit = () => {
+    return this.props.onEdit(this.props.id);
+  }
   render(){
       var {task, id} = this.props;
     return(
         <tr>
             <td>{id}</td>
-            <td>{task.name}</td>
+            <td>{task.taskName}</td>
             <td>
-            <span className ={classNames('btn', {'btn-outline-success': task.status}, 
+            <span onClick={this.onUpdateStatus} className ={classNames('btn', {'btn-outline-success': task.status}, 
             {'btn-outline-dark': !task.status})}>
             {task.status === true ? 'Kích hoạt' : 'Ẩn'}</span>
             </td>
             <td>
-            <button className="btn btn-warning" type="submit">Sửa</button>
-            <button className="btn btn-danger" type="submit">Xóa</button>
+            <button data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal" onClick={this.onEdit} className="btn btn-warning" type="submit">Sửa</button>
+            <button onClick={this.onDelete} className="btn btn-danger" type="submit">Xóa</button>
             </td>
         </tr>
     );

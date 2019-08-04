@@ -5,17 +5,16 @@ class TaskList extends Component{
     super();
 
   }
-  
-  
   render(){
     var { tasks } = this.props;
     var elmTasks = tasks.map((item, index) => {
-      return <TaskItem key={index} id={index} task={item} />
+      return <TaskItem key={index} id={index} task={item} onEdit={this.props.onEdit}
+      onDelete={this.props.onDelete} onUpdateStatus = {this.props.onUpdateStatus} />
     }); 
     return(
         <div className="row">
               <div className="col-md-12">
-               <table className="table table-borderd table-hover">
+               <table className="table table-borderd table-hover mt-3">
               <thead>
                 <tr>
                   <th>STT</th>
