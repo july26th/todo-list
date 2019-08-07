@@ -29,9 +29,7 @@ class App extends Component{
     }
   }
 
-  randomID(){
-    return Math.floor((Math.random()*0x10000)+1).toString(16);
-  }
+ 
   // onGenerate = () => {
   //   const taskslist = [
   //     {
@@ -55,10 +53,6 @@ class App extends Component{
   //   });
   //   localStorage.setItem('tasks', JSON.stringify(taskslist));
   // };
-  generateID(){
-    return this.randomID() + this.randomID() + this.randomID() + '-' 
-    + this.randomID() + this.randomID() + this.randomID();
-  }
 
   onSubmit = (data) => {
     var {tasks} = this.state;
@@ -222,7 +216,7 @@ class App extends Component{
           </div>
           </div>
             <Control onSearch={this.onSearch} onSort={this.onSort}/>
-            <TaskList onFilter={this.onFilter} tasks = {tasks} onDelete={this.onDelete}
+            <TaskList onFilter={this.onFilter} onDelete={this.onDelete}
              onUpdateStatus={this.onUpdateStatus} onEdit={this.onEdit}/>
         </div>
       </div>
