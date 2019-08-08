@@ -1,5 +1,7 @@
 import React, { Component} from "react";
 import classNames from 'classnames';
+import { connect } from 'react-redux';
+import * as actions from './../actions/index'
 class TaskItem extends Component{
   constructor() {
     super();
@@ -7,13 +9,14 @@ class TaskItem extends Component{
   }
   
   onUpdateStatus = () => {
-    return this.props.onUpdateStatus(this.props.id);
+    return this.props.onUpdateStatus(this.props.task.id);
   }
   onDelete = () => {
-    return this.props.onDelete(this.props.id);
+    return this.props.onDeleteTask(this.props.id); //dispatch action
   }
   onEdit = () => {
-    return this.props.onEdit(this.props.id);
+    this.props.onOpenForm();
+    this.props.onEditTask(this.props.task);
   }
   render(){
       var {task, id} = this.props;
@@ -22,7 +25,8 @@ class TaskItem extends Component{
             <td>{id}</td>
             <td>{task.taskName}</td>
             <td>
-            <span onClick={this.onUpdateStatus} className ={classNames('btn', {'btn-outline-success': task.status}, 
+            <span onClick={this.onUpdateStatus} 
+            className ={classNames('btn', {'btn-outline-success': task.status}, 
             {'btn-outline-dark': !task.status})}>
             {task.status === true ? 'Kích hoạt' : 'Ẩn'}</span>
             </td>
@@ -36,6 +40,29 @@ class TaskItem extends Component{
    
   }
 }
+const mapStatetoProps = (state) => {
+  return {
+    display: state.display,
+    tasks: state.tasks
+  };
+};
 
-export default TaskItem;
+const mapDispatchtoProps = (dispatch, props) => {
+  return {
+    onOpenForm: () => {
+      dispatch(actions.openForm());
+    },
+    onUpdateStatus: (id) => {
+      dispatch(actions.updateStatus(id));
+    },
+    onDeleteTask: (id) => {
+      dispatch(actions.deleteTask(id));
+    },
+    onEditTask: (task) => {
+      dispatch(actions.editTask(task));
+    },
+  };
+};
+
+export default connect(mapStatetoProps, mapDispatchtoProps)(TaskItem);
 

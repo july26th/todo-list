@@ -11,17 +11,30 @@ class TaskForm extends Component{
     }
   }
   componentWillMount() {
-    if(this.props.isEditing)
+    if(this.props.editTask && this.props.editTask.id !== "")
     {
      this.setState({
-        id: this.props.isEditing.id,
-        taskName: this.props.isEditing.taskName,
-        status: this.props.isEditing.status
+        id: this.props.editTask.id,
+        taskName: this.props.editTask.taskName,
+        status: this.props.editTask.status
       })
     }
+    else {
+      this.onClear();
+    }
   }
-  componentWillUnmount() {
-    return this.props.deleteEdit(true);
+  componentWillReceiveProps(nextProps) {
+    if(nextProps && nextProps.editTask)
+    {
+     this.setState({
+        id: this.props.editTask.id,
+        taskName: this.props.editTask.taskName,
+        status: this.props.editTask.status
+      })
+    }
+    else {
+      this.onClear();
+    }
   }
   onChange = (event) => {
     var name = event.target.name;
@@ -34,27 +47,29 @@ class TaskForm extends Component{
   }
   onSubmit = (event) => {
     event.preventDefault();
-    this.props.onAddTask(this.state);
-    this.onClear();  
+    this.props.onSaveTask(this.state);
+    this.props.onSubmitForm(); 
+    this.onClear(); 
   }
   onClear = () => {
     this.setState({
-      id: '',
       taskName: '',
       status: false
     });
   }
   onCloseForm = () => {
-    this.props.onCloseForm(true);
+    this.onClear();
+    this.props.onCloseForm();
   };
   render(){
+    var {display} = this.props;
     
     return(
           
               <div className="modal-content">
                 <div className="modal-header header-taskform ">
                   <h4 className="modal-title">
-                  {this.props.isEditing ? 'Sửa công việc' : 'Thêm công việc'}</h4>
+                  {this.props.editTask.id ? 'Sửa công việc' : 'Thêm công việc'}</h4>
                   <button type="button" onClick={this.onCloseForm} className="close" >&times;</button>
                 </div>
                 <form onSubmit={this.onSubmit}>
@@ -80,9 +95,6 @@ class TaskForm extends Component{
               </div>
 
             
-            
-       
-          
       
     );
     
@@ -93,14 +105,21 @@ class TaskForm extends Component{
 
 const mapStatetoProps = (state) => {
   return {
-    // tasks: state.tasks
+    display: state.display,
+    editTask: state.editTask
   };
 };
 
 const mapDispatchtoProps = (dispatch, props) => {
   return {
-    onAddTask: (task) => {
-      dispatch(actions.addTask(task));
+    onSaveTask: (task) => {
+      dispatch(actions.saveTask(task));
+    },
+    onSubmitForm: () => {
+      dispatch(actions.submitForm());
+    },
+    onCloseForm: () => {
+      dispatch(actions.closeForm());
     }
   };
 };
