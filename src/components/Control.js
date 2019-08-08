@@ -12,7 +12,7 @@ class Control extends Component{
     return(
         <div className="row mt-3">
         <Search  />  
-        <Sort onSort={this.props.onSort}/>
+        <Sort />
         </div>
             
     );

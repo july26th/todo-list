@@ -6,14 +6,6 @@ import TaskList from "./components/TaskList";
 import { connect } from 'react-redux';
 import * as actions from './actions/index'
 class App extends Component{
-  constructor() {
-    super();
-    this.state = {
-      tasks: [],
-      sortBy: 'name',
-      sortValue: 1
-    }
-  }
   
   componentWillMount() {
     if(localStorage && localStorage.getItem('tasks')) {
@@ -37,18 +29,8 @@ class App extends Component{
     );
   }
 
-
-  onSort = (sortBy, sortValue) => {
-    this.setState({
-      sortBy: sortBy,
-      sortValue: sortValue
-    }
-    // ,() => console.log(this.state)
-    );
-    
-  }
   render(){
-    var { tasks, keyword, sortBy, sortValue } = this.state;
+    var { tasks, keyword} = this.state;
     var { display } = this.props;
     const $ = window.$;
     if(display) {
@@ -57,20 +39,7 @@ class App extends Component{
     else {
       $("#myModal").modal('hide');
     }
-    if(sortBy === 'name')
-    {
-      tasks.sort((a, b) => {
-        if(a.taskName > b.taskName) return sortValue;
-        else if(a.taskName < b.taskName) return -sortValue;
-        else return 0;
-      });
-    } else {
-      tasks.sort((a, b) => {
-        if(a.status > b.status) return -sortValue;
-        else if(a.status < b.status) return sortValue;
-        else return 0;
-      });
-    }
+    
     
     
     return(
@@ -92,7 +61,7 @@ class App extends Component{
             }
           </div>
           </div>
-            <Control  onSort={this.onSort}/>
+            <Control  />
             <TaskList />
         </div>
       </div>

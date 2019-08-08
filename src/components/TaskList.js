@@ -24,8 +24,7 @@ class TaskList extends Component{
     this.props.onFilterTable(filter)
   }
   render(){
-    var { tasks, filterTable, searchTask } = this.props;
-    console.log(searchTask);
+    var { tasks, filterTable, searchTask, sort } = this.props;
     if(filterTable.filterName)
     {
       tasks = tasks.filter((key) => {
@@ -40,10 +39,27 @@ class TaskList extends Component{
     tasks = tasks.filter((key) => {
       return key.taskName.toLowerCase().indexOf(searchTask) !== -1;
     });
+    
+    if(sort.by === 'name')
+    {
+      tasks.sort((a, b) => {
+        if(a.taskName > b.taskName) return sort.value;
+        else if(a.taskName < b.taskName) return -sort.value;
+        else return 0;
+      });
+    } else {
+      tasks.sort((a, b) => {
+        if(a.status > b.status) return -sort.value;
+        else if(a.status < b.status) return sort.value;
+        else return 0;
+      });
+    }
+
     var elmTasks = tasks.map((item, index) => {
       return <TaskItem key={index} id={index} task={item} />
     }); 
-    
+
+
     return(
         <div className="row">
               <div className="col-md-12">
@@ -91,7 +107,8 @@ const mapStatetoProps = (state) => {
   return {
     tasks: state.tasks,
     filterTable: state.filterTable,
-    searchTask: state.searchTask
+    searchTask: state.searchTask,
+    sort: state.sortTask
   };
 };
 
