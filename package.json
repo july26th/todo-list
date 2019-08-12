@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
+    "gh-pages": "^2.1.1",
+    "homepage": "https://july26th.github.io/todo-list/",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
@@ -11,6 +13,8 @@
     "redux": "^4.0.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
