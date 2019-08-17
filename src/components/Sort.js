@@ -11,9 +11,9 @@ class Sort extends Component{
   };
   render(){
     return(
-            <div className="col-md-6">
+            <div className="col-md-2">
               <div className="dropdown">
-              <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button className="btn btn-hover dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Sắp xếp
               </button>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">

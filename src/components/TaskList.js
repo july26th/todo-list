@@ -63,17 +63,11 @@ class TaskList extends Component{
     return(
         <div className="row">
               <div className="col-md-12">
+                <h4>Due Today (5)</h4>
                <table className="table table-borderd table-hover mt-3">
-              <thead>
-                <tr>
-                  <th>STT</th>
-                  <th>Tên</th>
-                  <th>Trạng thái</th>
-                  <th>Hành động</th>
-                </tr>
-              </thead>
+
               <tbody>
-                <tr>
+                {/* <tr>
                   <td></td>
                   <td>
                     <input type="text" className="form-control" name="filterName"
@@ -89,7 +83,7 @@ class TaskList extends Component{
                     </select>
                   </td>
                   <td></td>
-                </tr>
+                </tr> */}
                 
                 {elmTasks}
               </tbody>

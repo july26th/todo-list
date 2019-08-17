@@ -10,7 +10,7 @@ class Control extends Component{
   
   render(){
     return(
-        <div className="row mt-3">
+        <div className="row w-100">
         <Search  />  
         <Sort />
         </div>

@@ -20,11 +20,12 @@ class Search extends Component{
   render(){
     const { keyword } = this.state;
     return(
-            <div className="col-md-6">
+            <div className="col-md-10">
                 <div className="input-group">
-                    <input type="text" className="form-control" name="keyword"
-                    value={keyword} onChange={this.onChange} placeholder="Nhập từ khóa..."/>
-                    <button onClick={this.onSearch} className="btn btn-primary" type="submit">Tìm</button>
+                
+                    <input type="text" className="form-control search-input" name="keyword"
+                    value={keyword} onChange={this.onChange} placeholder="Search..."/>
+                    <a onClick={this.onSearch} className="search-icon"><i class="fas fa-search"></i></a>
                 </div>           
             </div>
             

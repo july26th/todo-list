@@ -1,10 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Permanent Marker', cursive !important;
+  background: #00BCD4;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+.container {
+  background: #fff;
+  margin-top: 1rem;
+  min-height: 600px;
+}
 .page-title {
-  font-size: 34px;
+  font-size: 2rem;
   font-weight: 500;
-  margin: 20px 0px;
+  margin: 0.8rem 0;
 }
 .App button {
   margin-right: 14px;
+}
+.header {
+  border-bottom: 0.1rem solid #e4e4e4;
+  box-shadow: 0 4px 6px -6px #222;
 }
 .header-taskform {
   display: flex;
@@ -34,4 +62,103 @@ td {
   font-style: normal;
   margin-left: 10px;
   display: inline-block;
+}
+.menu-item {
+  padding-left: 2.5rem;
+  margin-bottom: 0.8rem;
+}
+.menu-item img {
+  margin-right: 1rem;
+}
+.border-left {
+  border-left: 0.1rem solid #e4e4e4 !important;
+}
+.search-input {
+  position: relative;
+  border-radius: 30px !important;
+  background: #F3F8FF;
+}
+.search-input::placeholder {
+  
+  color: #8aa1c1;
+}
+.search-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  height: 2.5rem;
+  width: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #d5dff9;
+}
+.search-icon i {
+  color: #29a4c1;
+}
+.btn-hover {
+  position: relative;
+  z-index: 1;
+  padding: 0.6rem 1rem;
+  border-radius: 50px;
+  background: #7986cb;
+  color: #fff;
+  border: 0.1rem solid black;
+}
+.btn-hover::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -10px;
+  bottom: -20px;
+  right: -10px;
+  background: inherit;
+  border-radius: 50px;
+  z-index: -1;
+  opacity: 0.4;
+  -webkit-transform: scale3d(0.8, 0.5, 1);
+  transform: scale3d(0.8, 0.5, 1);
+}
+.btn-hover:hover {
+  transition: background-color 0.1s 0.3s, color 0.1s 0.3s;
+  color: #ECEFF1;
+  background-color: #3f51b5;
+  -webkit-animation: anim-moema-1 0.3s forwards;
+  animation: anim-moema-1 0.3s forwards;
+}
+@keyframes anim-moema-1 {
+	60% {
+		-webkit-transform: scale3d(0.8, 0.8, 1);
+		transform: scale3d(0.8, 0.8, 1);
+	}
+	85% {
+		-webkit-transform: scale3d(1.1, 1.1, 1);
+		transform: scale3d(1.1, 1.1, 1);
+	}
+	100% {
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+}
+.dropdown-toggle:after { 
+  content: none;
+}
+.dropdown-menu {
+  left: -5rem !important;
+  padding-top: 0.4rem 0;
+  min-width: 6rem !important;
+}
+.dropdown-item {
+  border-bottom: 1px solid rgba(0,0,0,.15);
+  display: flex;
+  justify-content: center;
+}
+.dropdown-item:last-child {
+  border-bottom: none;
 }

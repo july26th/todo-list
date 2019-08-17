@@ -76,20 +76,20 @@ class TaskForm extends Component{
                   
                 <div className="modal-body">
                   <div className="form-group">
-                    <label>Tên: </label>
+                    <label>Task Name: </label>
                     <input required type="text" className="form-control" 
                     name="taskName"  value={this.state.taskName} onChange={this.onChange}/>
                   </div>
-                    <label>Trạng thái: </label>
+                    <label>Status: </label>
                     <select className="form-control" name="status"
                     value={this.state.status} onChange={this.onChange}>
-                      <option value={true}>Kích hoạt</option>
-                      <option value={false}>Ẩn</option>
+                      <option value={true}>Compelte</option>
+                      <option value={false}>Incomplete</option>
                     </select><br/>             
                 </div>
                 <div className="modal-footer">
-                  <button className="btn btn-warning" type="submit">Lưu lại</button>
-                  <button type="button" className="btn btn-default" onClick={this.onClear}>Hủy</button>
+                  <button className="btn btn-warning" type="submit">Save</button>
+                  <button type="button" className="btn btn-default" onClick={this.onClear}>Clear</button>
                 </div>
                 </form>
               </div>
