@@ -19,7 +19,9 @@ var myReducer = (state = initialState, action) => {
             var task = {
                 id: action.task.id,
                 taskName: action.task.taskName,
-                status: action.task.status
+                priority: action.task.priority,
+                status: action.task.status,
+                startDate: JSON.stringify(action.task.startDate)
             };
             if(!task.id) {
               task.id = generateID();

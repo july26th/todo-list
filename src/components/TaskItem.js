@@ -6,7 +6,6 @@ class TaskItem extends Component {
   constructor() {
     super();
     this.state = {
-      active: "",
     };
   }
 
@@ -27,23 +26,43 @@ class TaskItem extends Component {
   }
   render() {
     const { task, id } = this.props;
-    const { active } = this.state;
-    console.log(active);
+    const parseDate = new Date(JSON.parse(task.startDate));
+    // if(parseDate. >= new Date())
+    // {
+    //   console.log('hi')
+    // }
+    var today = new Date();
+    // if(parseDate.getDate() == today.getDate() &&
+    // parseDate.getMonth() == today.getMonth() &&
+    // parseDate.getFullYear() == today.getFullYear())
+    // {
+    //   console.log('is today');
+    // }
+    // else console.log('not today');
     return (
       <tr>
         {/* <td>{id}</td> */}
-        <td>{task.taskName}</td>
-        <td>
+        <td className="pt-4">  <p>
+            <span className={classNames('priority',
+            { 'high-prio': task.priority === "High" },
+            { 'medium-prio': task.priority === "Medium" },
+            { 'low-prio': task.priority === "Low" })}>
+            {task.priority}
+            </span>
+          </p></td>
+        <td className="text-left">
+          <p>{task.taskName}</p>
+          <p className="text-time">{parseDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
+        </td>
+        <td className="pt-3">
           <span onClick={this.onUpdateStatus}
             className={classNames('btn', { 'btn-outline-success': task.status },
               { 'btn-outline-dark': !task.status })}>
             {task.status === true ? 'Completed' : 'Incomplete'}</span>
         </td>
+  
         <td>
-          11 AM
-        </td>
-        <td>
-          <div className="dropdown ">
+          <div className="dropdown pt-2 ">
             <p className="dropdown-toggle fas fa-ellipsis-v" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             </p>
             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">

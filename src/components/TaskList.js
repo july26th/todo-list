@@ -8,7 +8,8 @@ class TaskList extends Component{
     super();
     this.state = {
       filterName: '',
-      filterStatus: -1
+      filterStatus: -1,
+      filterDate: "today"
     };
   }
   onChange = (event) => {
@@ -25,6 +26,39 @@ class TaskList extends Component{
   }
   render(){
     var { tasks, filterTable, searchTask, sort } = this.props;
+    var today = new Date();
+    // if(parseDate.getDate() == today.getDate() &&
+    // parseDate.getMonth() == today.getMonth() &&
+    // parseDate.getFullYear() == today.getFullYear())
+    // {
+    //   console.log('is today');
+    // }
+    // else console.log('not today');
+    console.log(sort);
+    if(sort.by === "date") {
+      if(sort.value === 1) {
+      tasks = tasks.filter((key) => {
+        let taskDate = new Date (JSON.parse(key.startDate));
+        return ( taskDate.getDate() == today.getDate() &&
+        taskDate.getMonth() == today.getMonth() &&
+        taskDate.getFullYear() == today.getFullYear() )
+     });
+    }
+    else if (sort.value === -1) {
+      tasks = tasks.filter((key) => {
+        let timeTaskDate = (new Date (JSON.parse(key.startDate))).setHours(0, 0, 0, 0);
+        var timeToday = today.setHours(0, 0, 0, 0);
+        console.log(timeTaskDate, timeToday);
+        return ( timeTaskDate > timeToday)
+     });
+    }
+    else {
+       tasks.sort((a, b) => {
+     //   return a.taskName.length - b.taskName.length;
+ return (new Date (JSON.parse(a.startDate))).getTime() - (new Date (JSON.parse(b.startDate))).getTime();
+      });
+    }
+    }
     if(filterTable.filterName)
     {
       tasks = tasks.filter((key) => {
@@ -58,42 +92,24 @@ class TaskList extends Component{
     var elmTasks = tasks.map((item, index) => {
       return <TaskItem key={index} id={index} task={item} />
     }); 
-
-
+    var count = 0;
+    tasks.map((item) => {
+      return item.status ? "" : count++ 
+    });
     return(
         <div className="row">
               <div className="col-md-12">
-                <h4>Due Today (5)</h4>
+                <h4>Due Today ({count})</h4>
                <table className="table table-borderd table-hover mt-3">
 
               <tbody>
-                {/* <tr>
-                  <td></td>
-                  <td>
-                    <input type="text" className="form-control" name="filterName"
-                    value={this.state.filterName} onChange={this.onChange}
-                    />
-                  </td>
-                  <td>
-                    <select className="form-control" name="filterStatus"
-                    value={this.state.filterStatus} onChange={this.onChange} >
-                      <option value={-1}>Tất cả</option>
-                      <option value={0}>Ẩn</option>
-                      <option value={1}>Kích hoạt</option>
-                    </select>
-                  </td>
-                  <td></td>
-                </tr> */}
                 
                 {elmTasks}
               </tbody>
             </table>
                 </div>
-        </div>
-            
+        </div>      
     );
-    
-   
   }
 }
 

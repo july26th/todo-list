@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
 import TaskForm from "./components/TaskForm";
-import Control from "./components/Control";
 import TaskList from "./components/TaskList";
+import Search from "./components/Search";
+import Sort from "./components/Sort";
 import todoImg from './img/todo.png';
-import upcomingImg from './img/upcoming.png'
-import allImg from './img/all.png';
-import todayImg from './img/today.svg';
 import { connect } from 'react-redux';
 import * as actions from './actions/index'
 class App extends Component {
@@ -16,6 +14,10 @@ class App extends Component {
       let items = JSON.parse(localStorage.getItem('tasks'));
       this.setState({
         tasks: items
+      })
+    } else {
+      this.setState({
+        tasks: ""
       })
     }
   }
@@ -50,7 +52,7 @@ class App extends Component {
       <div className="App">
 
         <div className="container">
-          <div className="row header">
+        <div className="row header">
             <div className="col-md-3">
               <div className="page-title d-flex align-items-center ">
                 <img src={todoImg} alt='' width="90px" height="90px" />
@@ -59,7 +61,7 @@ class App extends Component {
 
             </div>
             <div className="col-md-7 d-flex align-items-center">
-              <Control />
+              <Search />
             </div>
             <div className="col-md-2 d-flex justify-content-end align-items-center">
               <button type="button" className="btn btn-hover" data-toggle="modal"
@@ -69,20 +71,11 @@ class App extends Component {
           </div>
 
           <div className="row mt-3">
-            <div className="col-md-3 d-flex flex-column p-4">
-              <div className="menu-item d-flex align-items-center">
-                <img src={allImg} alt='' width="40px" height="40px" />
-                <h4>All Tasks</h4>
-              </div>
-              <div className="menu-item d-flex align-items-center">
-                <img src={todayImg} alt='' width="40px" height="40px" />
-                <h4>Today</h4>
-              </div>
-              <div className="menu-item d-flex align-items-center">
-                <img src={upcomingImg} alt='' width="40px" height="40px" />
-                <h4>Upcoming</h4>
-              </div>
-            </div>
+            
+            <Sort />
+        
+          
+          
             <div className="col-md-9 p-4 border-left">
 
               {/* <button className="btn btn-primary" onClick={this.onGenerate} type="submit">Tạo key</button> */}
