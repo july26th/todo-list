@@ -45,11 +45,11 @@ class TodoHeader extends Component {
             <h2>Todo List</h2>
           </div>
         </div>
-        <div className="col-md-7 d-flex align-items-center">
+        <div className="col-md-6 d-flex align-items-center">
           <Search />
         </div>
-        <div className="col-md-2 d-flex justify-content-end align-items-center">
-          <button type="button" className="btn btn-hover" data-toggle="modal"
+        <div className="col-md-3 d-flex justify-content-center align-items-center">
+       <button type="button" className="ml-4 btn btn-hover" data-toggle="modal"
             data-backdrop="static" data-keyboard="false"
             onClick={this.onOpenForm} data-target="#myModal">New Task</button>
         </div>
@@ -67,7 +67,7 @@ const mapStatetoProps = (state) => {
   };
 };
 
-const mapDispatchtoProps = (dispatch, props) => {
+const mapDispatchtoProps = (dispatch) => {
   return {
     onOpenForm: () => {
       dispatch(actions.openForm());

@@ -11,7 +11,8 @@ class TaskForm extends Component {
       taskName: '',
       priority: 'Medium',
       status: false,
-      startDate: new Date()
+      startDate: new Date(),
+      userId: this.props.user.id
     }
   }
   handleChange = (date) => {
@@ -139,11 +140,12 @@ class TaskForm extends Component {
 const mapStatetoProps = (state) => {
   return {
     display: state.display,
-    editTask: state.editTask
+    editTask: state.editTask,
+    user: state.authentication.user
   };
 };
 
-const mapDispatchtoProps = (dispatch, props) => {
+const mapDispatchtoProps = (dispatch) => {
   return {
     onSaveTask: (task) => {
       dispatch(actions.saveTask(task));

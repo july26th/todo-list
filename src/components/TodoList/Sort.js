@@ -28,28 +28,7 @@ class Sort extends Component {
           <img src={upcomingImg} alt='' width="40px" height="40px" />
           <h4>Upcoming</h4>
         </div>
-        {/* <div className="dropdown">
-          <button className="btn btn-hover dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Sắp xếp
-                </button>
-          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a className="dropdown-item" href="#" onClick={() => this.onClick('name', 1)}>
-              Tên A->Z
-                    </a>
-            <a className="dropdown-item" href="#" onClick={() => this.onClick('name', -1)}>
-              Tên Z->A
-                    </a>
-            <a className="dropdown-item" href="#" onClick={() => this.onClick('status', 1)}>
-              Trạng thái Kích hoạt
-                    </a>
-            <a className="dropdown-item" href="#" onClick={() => this.onClick('status', -1)}>
-              Trạng thái Ẩn
-                    </a>
-            <a className="dropdown-item" href="#" >
-              Theo ngày
-                    </a>
-          </div>
-        </div> */}
+    
       </div>
     );
 

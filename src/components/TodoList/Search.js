@@ -20,7 +20,7 @@ class Search extends Component{
   render(){
     const { keyword } = this.state;
     return(
-            <div className="col-md-10">
+            <div className="col-md-12">
                 <div className="input-group">
                 
                     <input type="text" className="form-control search-input" name="keyword"

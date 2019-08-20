@@ -12,7 +12,7 @@ class TodoList extends Component {
 
     return (
 
-      <div className="container">
+      <div className="container todo-list">
         <TodoHeader />
         <div className="row mt-3">
           <Sort />

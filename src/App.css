@@ -7,7 +7,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Permanent Marker', cursive !important;
-  background: #00BCD4;
 }
 
 h1,
@@ -19,8 +18,29 @@ p {
 }
 .container {
   background: #fff;
-  margin-top: 1rem;
+}
+.todo-list {
   min-height: 600px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  min-height: 600px;
+  box-shadow: 0px 2px 6px 0px #222;
+}
+.nav-header {
+  border-bottom: 2px solid gainsboro;
+  background:#f8f9fa!important;
+}
+.nav-item {
+  padding: 0 0.6rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.help-block {
+  color: red;
+}
+.nav-item a {
+  color: #7076d4;
+  font-size: 1.1rem;
 }
 .page-title {
   font-size: 2rem;
@@ -184,4 +204,22 @@ td {
   margin-top: 0.2rem;
   font-weight: 600;
   font-size: 0.8rem;
+}
+.box-form form {
+  width: 80%;
+  margin: 1rem auto;
+}
+.box-form .form-group input {
+
+  padding: 0.5rem 1.2rem; 
+}
+.box-form .btn-form button{
+  width: 100%;
+  font-size: 1.5rem;
+  background: #7076d4;
+  color: #fff;;
+  outline: none !important;
+}
+.box-form .btn-form button:hover {
+  background: #5459a7;
 }

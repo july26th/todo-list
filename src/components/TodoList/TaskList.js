@@ -12,20 +12,9 @@ class TaskList extends Component {
       filterDate: "today"
     };
   }
-  onChange = (event) => {
-    let name = event.target.name;
-    let value = event.target.value;
-    this.setState({
-      [name]: value
-    });
-    let filter = {
-      filterName: name === 'filterName' ? value : this.state.filterName,
-      filterStatus: name === 'filterStatus' ? value : this.state.filterStatus
-    };
-    this.props.onFilterTable(filter)
-  }
+
   render() {
-    var { tasks, filterTable, searchTask, sort } = this.props;
+    var { tasks, sort } = this.props;
     var today = new Date();
     if (sort.by === "date") {
       if (sort.value === 1) {
@@ -49,51 +38,26 @@ class TaskList extends Component {
         });
       }
     }
-    if (filterTable.filterName) {
-      tasks = tasks.filter((key) => {
-        return key.taskName.toLowerCase().indexOf(filterTable.filterName) !== -1;
 
-      });
-    }
-    tasks = tasks.filter((key) => {
-      if (filterTable.filterStatus === -1) return key;
-      else return key.status === (filterTable.filterStatus === 0 ? false : true);
-    });
-    tasks = tasks.filter((key) => {
-      return key.taskName.toLowerCase().indexOf(searchTask) !== -1;
-    });
-
-    if (sort.by === 'name') {
-      tasks.sort((a, b) => {
-        if (a.taskName > b.taskName) return sort.value;
-        else if (a.taskName < b.taskName) return -sort.value;
-        else return 0;
-      });
-    } else {
-      tasks.sort((a, b) => {
-        if (a.status > b.status) return -sort.value;
-        else if (a.status < b.status) return sort.value;
-        else return 0;
-      });
-    }
     var elmTasks = tasks.map((item, index) => {
-      return <TaskItem key={index} id={index} task={item} />
+      if (item.userid === this.props.user.id) 
+        return <TaskItem key={index} id={index} task={item} />
     });
     var countDone = 0;
     var countNotDone = 0;
     tasks.map((item) => {
-      return item.status ? countDone++ : countNotDone++
+      if (item.userid === this.props.user.id)
+        return item.status ? countDone++ : countNotDone++
     });
     var test = "";
-    if(sort.value === 1) test = `Due Today (${countNotDone})`;
-     else if (sort.value === -1) test = `Upcoming (${countNotDone})`;
-     else test = `Tasks Done (${countDone})`
+    if (sort.value === 1) test = `Due Today (${countNotDone})`;
+    else if (sort.value === -1) test = `Upcoming (${countNotDone})`;
+    else test = `Tasks Done (${countDone})`
 
-      console.log("test on TaskList", this.props.sort);
     return (
       <div className="row">
         <div className="col-md-12">
-        <h4> {test}</h4>;
+          <h4> {test}</h4>;
           <table className="table table-borderd table-hover mt-3">
 
             <tbody>
@@ -110,13 +74,12 @@ class TaskList extends Component {
 const mapStatetoProps = (state) => {
   return {
     tasks: state.tasks,
-    filterTable: state.filterTable,
-    searchTask: state.searchTask,
-    sort: state.sortTask
+    sort: state.sortTask,
+    user: state.authentication.user
   };
 };
 
-const mapDispatchtoProps = (dispatch, props) => {
+const mapDispatchtoProps = (dispatch) => {
   return {
     onFilterTable: (filter) => {
       dispatch(actions.filterTable(filter));
