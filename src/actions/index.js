@@ -1,5 +1,6 @@
 import * as types from './../constants/ActionTypes'
-
+import { userService } from '../service';
+import { history } from '../history.js';
 export const listAll = () => {
     return {
         type: types.LIST_ALL
@@ -78,3 +79,79 @@ export const sortTask = (sort) => {
         sort: sort
     }
 };
+
+
+export const alertActions = {
+    success,
+    error,
+    clear
+};
+
+function success(message) {
+    return { type: types.alertConstants.SUCCESS, message };
+}
+
+function error(message) {
+    return { type: types.alertConstants.ERROR, message };
+}
+
+function clear() {
+    return { type: types.alertConstants.CLEAR };
+}
+
+
+export const userActions = {
+    login,
+    logout,
+    register
+};
+
+function login(username, password) {
+    return dispatch => {
+        dispatch(request({ username }));
+
+        userService.login(username, password)
+            .then(
+                user => { 
+                    dispatch(success(user));
+                    history.push('/todolist');
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request(user) { return { type: types.userConstants.LOGIN_REQUEST, user } }
+    function success(user) { return { type: types.userConstants.LOGIN_SUCCESS, user } }
+    function failure(error) { return { type: types.userConstants.LOGIN_FAILURE, error } }
+}
+
+function logout() {
+    userService.logout();
+    return { type: types.userConstants.LOGOUT };
+}
+
+function register(user) {
+    return dispatch => {
+        dispatch(request(user));
+
+        userService.register(user)
+            .then(
+                user => { 
+                    dispatch(success());
+                    history.push('/login');
+                    dispatch(alertActions.success('Registration successful'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request(user) { return { type: types.userConstants.REGISTER_REQUEST, user } }
+    function success(user) { return { type: types.userConstants.REGISTER_SUCCESS, user } }
+    function failure(error) { return { type: types.userConstants.REGISTER_FAILURE, error } }
+}

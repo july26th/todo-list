@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import * as actions from './../actions/index'
+import * as actions from '../../actions/index'
 class TaskForm extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +18,6 @@ class TaskForm extends Component {
     this.setState({
       startDate: date
     });
-    console.log(date);
   }
   componentWillMount() {
     if (this.props.editTask && this.props.editTask.id !== "") {
@@ -76,8 +75,6 @@ class TaskForm extends Component {
     this.props.onCloseForm();
   };
   render() {
-    var { display } = this.props;
-    console.log(typeof this.state.startDate);
     return (
 
       <div className="modal-content">

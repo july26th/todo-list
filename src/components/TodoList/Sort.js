@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import upcomingImg from '../img/upcoming.png'
-import allImg from '../img/all.png';
-import todayImg from '../img/today.svg';
-import * as actions from './../actions/index';
+import upcomingImg from '../../img/upcoming.png'
+import allImg from '../../img/all.png'
+import todayImg from '../../img/today.svg';
+import * as actions from '../../actions/index';
 
 class Sort extends Component {
 

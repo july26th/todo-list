@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import * as actions from './../actions/index'
+import * as actions from '../../actions/index'
 class TaskItem extends Component {
   constructor() {
     super();
@@ -25,23 +25,11 @@ class TaskItem extends Component {
     });
   }
   render() {
-    const { task, id } = this.props;
+    const { task } = this.props;
     const parseDate = new Date(JSON.parse(task.startDate));
-    // if(parseDate. >= new Date())
-    // {
-    //   console.log('hi')
-    // }
-    var today = new Date();
-    // if(parseDate.getDate() == today.getDate() &&
-    // parseDate.getMonth() == today.getMonth() &&
-    // parseDate.getFullYear() == today.getFullYear())
-    // {
-    //   console.log('is today');
-    // }
-    // else console.log('not today');
+    const { sort } = this.props;  
     return (
       <tr>
-        {/* <td>{id}</td> */}
         <td className="pt-4">  <p>
             <span className={classNames('priority',
             { 'high-prio': task.priority === "High" },
@@ -52,7 +40,11 @@ class TaskItem extends Component {
           </p></td>
         <td className="text-left">
           <p>{task.taskName}</p>
-          <p className="text-time">{parseDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
+          <p className="text-time">{ 
+            sort.value === 1 ?
+            parseDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+            : parseDate.toLocaleString()
+            }</p>
         </td>
         <td className="pt-3">
           <span onClick={this.onUpdateStatus}
@@ -66,12 +58,12 @@ class TaskItem extends Component {
             <p className="dropdown-toggle fas fa-ellipsis-v" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             </p>
             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a className="dropdown-item" href="#" >
+              <span className="dropdown-item"  >
                 <p data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal" onClick={this.onEdit}>Edit</p>
-              </a>
-              <a className="dropdown-item" href="#">
+              </span>
+              <span className="dropdown-item" >
                 <p onClick={this.onDelete} className="">Delete</p>
-              </a>
+              </span>
 
             </div>
           </div>
@@ -85,7 +77,8 @@ class TaskItem extends Component {
 const mapStatetoProps = (state) => {
   return {
     display: state.display,
-    tasks: state.tasks
+    tasks: state.tasks,
+    sort: state.sortTask
   };
 };
 

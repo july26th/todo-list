@@ -5,14 +5,21 @@ import editTask from './editTask';
 import filterTable from './filterTable';
 import searchTask from './searchTask';
 import sortTask from './sortTask';
+import alert from './alert';
+import authentication from './authentication';
+import registration from './registration';
 
 const myReducer = combineReducers({
-    tasks: tasks,
-    display: display,
-    editTask: editTask,
-    filterTable: filterTable,
-    searchTask: searchTask,
-    sortTask: sortTask
+    tasks,
+    display,
+    editTask,
+    filterTable,
+    searchTask,
+    sortTask,
+    alert,
+    authentication,
+    registration
+
 });
 
 export default myReducer;

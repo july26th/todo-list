@@ -1,6 +1,6 @@
 import React, { Component} from "react";
 import { connect } from 'react-redux';
-import * as actions from './../actions/index';
+import * as actions from '../../actions/index';
 
 class Search extends Component{
   constructor() {
@@ -25,7 +25,7 @@ class Search extends Component{
                 
                     <input type="text" className="form-control search-input" name="keyword"
                     value={keyword} onChange={this.onChange} placeholder="Search..."/>
-                    <a onClick={this.onSearch} className="search-icon"><i className="fas fa-search"></i></a>
+                    <span onClick={this.onSearch} className="search-icon"><i className="fas fa-search"></i></span>
                 </div>           
             </div>
             
