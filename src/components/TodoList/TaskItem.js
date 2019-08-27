@@ -13,7 +13,7 @@ class TaskItem extends Component {
     return this.props.onUpdateStatus(this.props.task.id);
   }
   onDelete = () => {
-    return this.props.onDeleteTask(this.props.id); //dispatch action
+    return this.props.onDeleteTask(this.props.id); 
   }
   onEdit = () => {
     this.props.onOpenForm();
